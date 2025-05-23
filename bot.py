@@ -3,7 +3,7 @@ import threading
 from flask import Flask
 from pyrogram import Client, filters
 from dotenv import load_dotenv
-
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 # Load environment variables
 load_dotenv()
 
@@ -31,6 +31,8 @@ def run_bot():
     app.run()
 
 # Pyrogram handler
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 
 @app.on_message(filters.command("start") & filters.private)
 async def start_handler(client, message):
@@ -45,28 +47,68 @@ async def start_handler(client, message):
         "If current server getting failed. Please use /Server2 Command."
     )
 
-    keyboard = {
-        "inline_keyboard": [
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[
             [
-                {
-                    "text": "10th Result 2025",
-                    "web_app": {"url": "https://geetasaini2042.github.io/Results/RAJ/2025/10th/"}
-                }
+                InlineKeyboardButton(
+                    "10th Result 2025",
+                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/")
+                )
             ],
             [
-                {
-                    "text": "12th Result 2025",
-                    "web_app": {"url": "https://geetasaini2042.github.io/Results/RAJ/2025/12th/"}
-                }
+                InlineKeyboardButton(
+                    "12th Result 2025",
+                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/")
+                )
             ]
         ]
-    }
+    )
 
     await message.reply_text(
         text,
         reply_markup=keyboard
     )
-@app.on_message(filters.command(["help", "Help"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+
+
+@app.on_message(filters.command(["NAMEWISE", "NameWise" , "Namewise","namewise"]) & filters.private)
+async def start_handler(client, message):
+    text = """
+Welcome to **SingodiyaTech Result Bot!**\n\n            
+Check your Rajasthan Board Result for 10th & 12th in one click by name.\n\n
+**NAMEWISE RESULT 2025**
+
+**Steps:**
+1. Tap the button below
+2. Enter your Name
+3. Confirm your Name and Fathers Name.
+4. Click on get.
+             
+**Use /help command to get help.**
+"""
+
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    "10th Result 2025",
+                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/NameWise/")
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    "12th Result 2025",
+                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/NameWise")
+                )
+            ]
+        ]
+    )
+
+    await message.reply_text(
+        text,
+        reply_markup=keyboard
+    )
+
+@app.on_message(filters.command(["help", "Help"]) & filters.private )
 async def help_handler(client, message):
     await message.reply_text(
         "Help Guide\n\n"
@@ -82,7 +124,7 @@ async def help_handler(client, message):
         "• Use /ContactAdmin to see all support options available.\n\n"
         "• Still need help? Contact our support @aks979."
     )
-@app.on_message(filters.command(["About", "about"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+@app.on_message(filters.command(["About", "about"]) & filters.private )
 async def about_handler(client, message):
     await message.reply_text(
         "About This Bot\n\n"
@@ -91,22 +133,38 @@ async def about_handler(client, message):
         "Powered by: SingodiyaTech"
     )
 
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-@app.on_message(filters.command(["OldResult", "old_result"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+@app.on_message(filters.command(["result2025", "Result2025"]) & filters.private)
 async def old_result_handler(client, message):
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("2024 - 10th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2024/10th/"}),
-            InlineKeyboardButton("2024 - 12th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2024/12th/"})
+            InlineKeyboardButton("10th RollWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/")),
+            InlineKeyboardButton("10th NameWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/NameWise"))
         ],
         [
-            InlineKeyboardButton("2023 - 10th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2023/10th/"}),
-            InlineKeyboardButton("2023 - 12th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2023/12th/"})
+            InlineKeyboardButton("12th RollWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/")),
+            InlineKeyboardButton("12th NameWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/NameWise"))
+        ]
+    ])
+    
+    await message.reply_text(
+        "Chack Your Result for 2025.\n** Select a Button Below**\n\nEach button will open a web app for that specific Class.",
+        reply_markup=keyboard
+    )
+@app.on_message(filters.command(["OldResult", "old_result"]) & filters.private)
+async def old_result_handler(client, message):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("2024 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2024/10th/")),
+            InlineKeyboardButton("2024 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2024/12th/"))
         ],
         [
-            InlineKeyboardButton("2022 - 10th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2022/10th/"}),
-            InlineKeyboardButton("2022 - 12th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2022/12th/"})
+            InlineKeyboardButton("2023 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2023/10th/")),
+            InlineKeyboardButton("2023 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2023/12th/"))
+        ],
+        [
+            InlineKeyboardButton("2022 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2022/10th/")),
+            InlineKeyboardButton("2022 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2022/12th/"))
         ]
     ])
     
@@ -116,17 +174,42 @@ async def old_result_handler(client, message):
         "Each button will open a web app for that specific year.",
         reply_markup=keyboard
     )
-@app.on_message(filters.command(["Feedback", "feedback"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+@app.on_message(filters.command(["OldResultNamewise", "old_result_namewise"]) & filters.private)
+async def old_result_handler(client, message):
+    text = """
+"**Previous Year Results (Name Wise)**
+Select year below to check 10th or 12th result:
+Each button will open a web app for that specific year (Name Wise).
+"""
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("2024 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2024/10th/NameWise/")),
+            InlineKeyboardButton("2024 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2024/12th/NameWise/"))
+        ],
+        [
+            InlineKeyboardButton("2023 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2023/10th/NameWise/")),
+            InlineKeyboardButton("2023 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2023/12th/NameWise/"))
+        ],
+        [
+            InlineKeyboardButton("2022 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2022/10th/NameWise/")),
+            InlineKeyboardButton("2022 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2022/12th/NameWise/"))
+        ]
+    ])
+    
+    await message.reply_text(text,
+        reply_markup=keyboard
+    )
+@app.on_message(filters.command(["Feedback", "feedback"]) & filters.private )
 async def feedback_handler(client, message):
     feedback_msg = (
         "Feedback & Suggestions\n\n"
         "We value your opinion!\n"
-        "• Send your feedback here: SingodiyaTeck (t.me/mr_singodiyabot)\n"
+        "• Send your feedback here: [SingodiyaTeck](t.me/mr_singodiyabot)\n"
         "• Or email us at: raindropgbstar@gmail.com"
     )
     await message.reply_text(feedback_msg)
 
-@app.on_message(filters.command(["ContactAdmin", "contact_admin"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+@app.on_message(filters.command(["ContactAdmin", "contact_admin"]) & filters.private)
 async def contact_admin_handler(client, message):
     admin_msg = (
         "Contact Admin\n\n"
@@ -135,17 +218,15 @@ async def contact_admin_handler(client, message):
         "• Support hours: 10 AM to 10 PM (Mon–Sun)"
     )
     await message.reply_text(admin_msg)
-# Entry point
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-@app.on_message(filters.command(["SchoolWise", "school_wise"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+@app.on_message(filters.command(["SchoolWise", "school_wise"]) & filters.private)
 async def school_wise_handler(client, message):
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("10th Result 2025", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2025/10th/SchoolWise"})
+            InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/SchoolWise"))
         ],
         [
-            InlineKeyboardButton("12th Result 2025", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2025/12th/SchoolWise"})
+            InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/SchoolWise"))
         ]
     ])
 
@@ -162,19 +243,19 @@ async def school_wise_handler(client, message):
     await message.reply_text(text, reply_markup=keyboard)
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-@app.on_message(filters.command(["Server3", "server3"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
-async def server3_handler(client, message):
+@app.on_message(filters.command(["Server2", "server2"]) & filters.private)
+async def server2_handler(client, message):
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("10th Result 2025", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2025/10th/Server3"})
+            InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/Server2"))
         ],
         [
-            InlineKeyboardButton("12th Result 2025", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2025/12th/Server3"})
+            InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/Server2"))
         ]
     ])
 
     text = (
-        "Welcome to SingodiyaTech Result Bot!\n\n"
+        "Welcome to **SingodiyaTech Result Bot!**\n\n **Server 2 \n\n**"
         "Check your Rajasthan Board Result for 10th & 12th in one click.\n\n"
         "Steps:\n"
         "1. Tap the button below\n"
@@ -184,6 +265,29 @@ async def server3_handler(client, message):
     )
 
     await message.reply_text(text, reply_markup=keyboard)
+@app.on_message(filters.command(["Server3", "Server3"]) & filters.private)
+async def server3_handler(client, message):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/Server3"))
+        ],
+        [
+            InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/Server3"))
+        ]
+    ])
+
+    text = (
+        "Welcome to **SingodiyaTech Result Bot!**\n\n **Server 2 \n\n**"
+        "Check your Rajasthan Board Result for 10th & 12th in one click.\n\n"
+        "Steps:\n"
+        "1. Tap the button below\n"
+        "2. Enter your roll number\n"
+        "3. Get your marks instantly as PDF or online view.\n"
+        "Use /help command to get help."
+    )
+
+    await message.reply_text(text, reply_markup=keyboard)
+
 if __name__ == "__main__":
     flask_thread = threading.Thread(target=run_flask)
     flask_thread.start()
