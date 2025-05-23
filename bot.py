@@ -90,6 +90,32 @@ async def about_handler(client, message):
         "Maintained by: @Aks979\n"
         "Powered by: SingodiyaTech"
     )
+
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+
+@app.on_message(filters.command(["OldResult", "old_result"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+async def old_result_handler(client, message):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("2024 - 10th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2024/10th/"}),
+            InlineKeyboardButton("2024 - 12th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2024/12th/"})
+        ],
+        [
+            InlineKeyboardButton("2023 - 10th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2023/10th/"}),
+            InlineKeyboardButton("2023 - 12th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2023/12th/"})
+        ],
+        [
+            InlineKeyboardButton("2022 - 10th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2022/10th/"}),
+            InlineKeyboardButton("2022 - 12th", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2022/12th/"})
+        ]
+    ])
+    
+    await message.reply_text(
+        "Previous Year Results\n\n"
+        "Select year below to check 10th or 12th result:\n"
+        "Each button will open a web app for that specific year.",
+        reply_markup=keyboard
+    )
 # Entry point
 if __name__ == "__main__":
     flask_thread = threading.Thread(target=run_flask)
