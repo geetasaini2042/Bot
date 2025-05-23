@@ -160,7 +160,30 @@ async def school_wise_handler(client, message):
     )
 
     await message.reply_text(text, reply_markup=keyboard)
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+@app.on_message(filters.command(["Server3", "server3"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+async def server3_handler(client, message):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("10th Result 2025", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2025/10th/Server3"})
+        ],
+        [
+            InlineKeyboardButton("12th Result 2025", web_app={"url": "https://geetasaini2042.github.io/Results/RAJ/2025/12th/Server3"})
+        ]
+    ])
+
+    text = (
+        "Welcome to SingodiyaTech Result Bot!\n\n"
+        "Check your Rajasthan Board Result for 10th & 12th in one click.\n\n"
+        "Steps:\n"
+        "1. Tap the button below\n"
+        "2. Enter your roll number\n"
+        "3. Get your marks instantly as PDF or online view.\n"
+        "Use /help command to get help."
+    )
+
+    await message.reply_text(text, reply_markup=keyboard)
 if __name__ == "__main__":
     flask_thread = threading.Thread(target=run_flask)
     flask_thread.start()
