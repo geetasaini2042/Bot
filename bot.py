@@ -82,6 +82,14 @@ async def help_handler(client, message):
         "• Use /ContactAdmin to see all support options available.\n\n"
         "• Still need help? Contact our support @aks979."
     )
+@app.on_message(filters.command(["About", "about"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+async def about_handler(client, message):
+    await message.reply_text(
+        "About This Bot\n\n"
+        "This bot helps students access their results and exam info quickly.\n"
+        "Maintained by: @Aks979\n"
+        "Powered by: SingodiyaTech"
+    )
 # Entry point
 if __name__ == "__main__":
     flask_thread = threading.Thread(target=run_flask)
