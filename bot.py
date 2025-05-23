@@ -64,8 +64,23 @@ async def start_handler(client, message):
 
     await message.reply_text(
         text,
-        parse_mode="markdown",
         reply_markup=keyboard
+    )
+@app.on_message(filters.command(["help", "Help"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+async def help_handler(client, message):
+    await message.reply_text(
+        "Help Guide\n\n"
+        "• Use 10th or 12th buttons to open result web apps.\n"
+        "• Use /NameWise to get your result by Name.\n"
+        "• Use /SchoolWise to get all school result in one table.\n"
+        "• Use /result2025 to get 2025 results\n"
+        "• Use /Server2 if the current server is not working\n"
+        "• Use /OldResult command to get Previous Years Results.\n"
+        "• Use /oldResultNamewise command to get Previous Years Results By Name.\n"
+        "• Use /About for revaluation or rechecking details.\n"
+        "• Use /Feedback to leave a feedback about Bot\n"
+        "• Use /ContactAdmin to see all support options available.\n\n"
+        "• Still need help? Contact our support @aks979."
     )
 # Entry point
 if __name__ == "__main__":
