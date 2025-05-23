@@ -116,6 +116,25 @@ async def old_result_handler(client, message):
         "Each button will open a web app for that specific year.",
         reply_markup=keyboard
     )
+@app.on_message(filters.command(["Feedback", "feedback"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+async def feedback_handler(client, message):
+    feedback_msg = (
+        "Feedback & Suggestions\n\n"
+        "We value your opinion!\n"
+        "• Send your feedback here: SingodiyaTeck (t.me/mr_singodiyabot)\n"
+        "• Or email us at: raindropgbstar@gmail.com"
+    )
+    await message.reply_text(feedback_msg)
+
+@app.on_message(filters.command(["ContactAdmin", "contact_admin"]) & filters.private & filters.user(lambda _, __, msg: not msg.from_user.is_bot))
+async def contact_admin_handler(client, message):
+    admin_msg = (
+        "Contact Admin\n\n"
+        "• Mention your issue clearly.\n"
+        "• Admin: @aks979\n"
+        "• Support hours: 10 AM to 10 PM (Mon–Sun)"
+    )
+    await message.reply_text(admin_msg)
 # Entry point
 if __name__ == "__main__":
     flask_thread = threading.Thread(target=run_flask)
