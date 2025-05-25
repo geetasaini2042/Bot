@@ -60,6 +60,12 @@ async def start_handler(client, message):
                     "12th Result 2025",
                     web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/")
                 )
+            ],
+            [
+                InlineKeyboardButton(
+                    "8th Result 2025",
+                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/")
+                )
             ]
         ]
     )
@@ -144,7 +150,13 @@ async def old_result_handler(client, message):
         [
             InlineKeyboardButton("12th RollWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/")),
             InlineKeyboardButton("12th NameWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/NameWise"))
-        ]
+        ],
+        [
+                InlineKeyboardButton(
+                    "8th Result 2025",
+                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/")
+                )
+            ]
     ])
     
     await message.reply_text(
