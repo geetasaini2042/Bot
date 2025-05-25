@@ -34,6 +34,13 @@ def run_bot():
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 
+from datetime import datetime, time
+import pytz
+
+
+
+    
+    # Rest remains same...
 @app.on_message(filters.command("start") & filters.private)
 async def start_handler(client, message):
     text = (
@@ -46,6 +53,8 @@ async def start_handler(client, message):
         "Use /help command to get help.\n"
         "If current server getting failed. Please use /Server2 Command."
     )
+    ist = pytz.timezone("Asia/Kolkata")
+    now = datetime.now(ist)
 
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[
@@ -69,12 +78,33 @@ async def start_handler(client, message):
             ]
         ]
     )
+    keyboard1 = InlineKeyboardMarkup(
+        inline_keyboard=[
+                        [
+                InlineKeyboardButton(
+                    "Check Result Now",
+                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/")
+                )
+            ]
+        ]
+    )
 
     await message.reply_text(
         text,
         reply_markup=keyboard
     )
-
+    if now.date() == datetime(2025, 5, 25, tzinfo=ist).date() and time(7, 0) <= now.time() <= time(16, 0):
+        special_msg = "\n\n**Aaj Kaksha 8 ka result aayega.**\nResult dopahar 5 baje tak jaari hoga."
+        await message.reply_text(
+        special_msg,
+        reply_markup=keyboard1
+        )
+    elif now.date() == datetime(2025, 5, 25, tzinfo=ist).date() and time(16, 0) <= now.time() <= time(17, 0):
+        special_msg = "\n\n**Aaj Kaksha 8 ka result aayega.**\nResult dopahar 5 baje tak jaari hoga."
+        await message.reply_text(
+        special_msg,
+        reply_markup=keyboard1
+    )
 
 @app.on_message(filters.command(["NAMEWISE", "NameWise" , "Namewise","namewise"]) & filters.private)
 async def start_handler(client, message):
