@@ -1,13 +1,16 @@
 import requests
-
-import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from script import user_histories 
+from script import user_histories , url
+from datetime import datetime
+import pytz
+
+def india_time():
+    india_timezone = pytz.timezone('Asia/Kolkata')
+    india_now = datetime.now(india_timezone)
+    return india_now.strftime("[%d/%m/%Y %H:%M:%S]")
 
 
 def sendAi_message(user_id,user_name, user_msg):
-    url = "https://text.pollinations.ai/openai"
     headers = {"Content-Type": "application/json"}
 
     # अगर यूज़र पहली बार मैसेज भेज रहा है, तो उसकी हिस्ट्री इनिशियलाइज़ करें
@@ -58,15 +61,4 @@ Your mission is to develop scalable, efficient, and intelligent automation solut
 
         return assistant_msg
     else:
-        return f"Error to connection you totai assistant"
-
-
-
-
-from datetime import datetime
-import pytz
-
-def india_time():
-    india_timezone = pytz.timezone('Asia/Kolkata')
-    india_now = datetime.now(india_timezone)
-    return india_now.strftime("[%d/%m/%Y %H:%M:%S]")
+        return 
