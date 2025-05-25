@@ -39,78 +39,91 @@ import pytz
 
 
 
-    
-    # Rest remains same...
+from datetime import datetime, time
+import pytz
+
 @app.on_message(filters.command("start") & filters.private)
 async def start_handler(client, message):
-    text = (
-        "Welcome to **SingodiyaTech Result Bot!**\n\n"
-        "Check your Rajasthan Board Result for 10th & 12th in one click.\n\n"
-        "**Steps:**\n"
-        "1. Tap the button below\n"
-        "2. Enter your roll number\n"
-        "3. Get your marks instantly as PDF or online view.\n"
-        "Use /help command to get help.\n"
-        "If current server getting failed. Please use /Server2 Command."
-    )
     ist = pytz.timezone("Asia/Kolkata")
     now = datetime.now(ist)
-
-    keyboard = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [
-                InlineKeyboardButton(
-                    "10th Result 2025",
-                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/")
-                )
-            ],
-            [
-                InlineKeyboardButton(
-                    "12th Result 2025",
-                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/")
-                )
-            ],
-            [
-                InlineKeyboardButton(
-                    "8th Result 2025",
-                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/")
-                )
-            ]
-        ]
-    )
     keyboard1 = InlineKeyboardMarkup(
         inline_keyboard=[
-                        [
-                InlineKeyboardButton(
-                    "Check Result Now",
-                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/")
-                )
-            ]
+            [InlineKeyboardButton("Check Result Now", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/"))]
+        ]
+    )
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/"))],
+            [InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/"))],
+            [InlineKeyboardButton("8th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/"))]
         ]
     )
 
-    await message.reply_text(
-        text,
-        reply_markup=keyboard
-    )
-    if now.date() == datetime(2025, 5, 25, tzinfo=ist).date() and time(7, 0) <= now.time() <= time(16, 0):
-        special_msg = (
-    "\n\n**आज कक्षा 8 का परिणाम जारी किया जायेगा! **\n"
-    "परिणाम शाम **5 बजे तक** जारी किया जाएगा। नीचे अपना रोल नंबर डालकर परिणाम जांचें।\n\n"
-    "**Today the Class 8th result will be declared!**\n"
-    "The result will be available by **5:00 PM**. Please enter your roll number below on time to check it."
-)
-        await message.reply_text(
-        special_msg,
-        reply_markup=keyboard1
-        )
-    elif now.date() == datetime(2025, 5, 25, tzinfo=ist).date() and time(16, 0) <= now.time() <= time(16, 30):
-        special_msg = "\n\n**कक्षा 8 का रिजल्ट कुछ ही देर में जारी किया जाएगा. कृपया प्रतीक्षा करें..**"
-        await message.reply_text(
-        special_msg,
-        reply_markup=keyboard1
-    )
+    if now.date() == datetime(2025, 5, 25, tzinfo=ist).date():
+        if time(1, 0) <= now.time() < time(10, 0):
+            await message.reply_text(
+                "**आज कक्षा 8 का परिणाम जारी किया जायेगा!**\n"
+                "परिणाम शाम **5 बजे तक** आएगा। कृपया रोल नंबर तैयार रखें।\n\n"
+                "**Class 8th result will be declared today by 5 PM.**\n"
+                "Please keep your roll number ready.",
+                reply_markup=keyboard1
+            )
 
+        elif time(10, 0) <= now.time() < time(13, 0):
+            await message.reply_text(
+                "**कक्षा 8 का परिणाम दोपहर बाद जारी किया जाएगा।**\n"
+                "शाम **5 बजे तक** परिणाम आने की संभावना है। कृपया प्रतीक्षा करें।\n\n"
+                "**Class 8th result will be released post noon.**\n"
+                "Expected by 5:00 PM. Please stay tuned.",
+                reply_markup=keyboard1
+            )
+
+        elif time(13, 0) <= now.time() < time(16, 0):
+            await message.reply_text(
+                "**कक्षा 8 का परिणाम जल्द ही जारी किया जाएगा!**\n"
+                "शाम **5 बजे** तक परिणाम देखने के लिए तैयार रहें।\n\n"
+                "**Class 8th result is coming soon!**\n"
+                "Be ready to check it by 5:00 PM.",
+                reply_markup=keyboard1
+            )
+
+        elif time(16, 0) <= now.time() < time(16, 30):
+            await message.reply_text(
+                "**कक्षा 8 का रिजल्ट कुछ ही देर में जारी किया जाएगा...**\n"
+                "कृपया इंतजार करें और बार-बार चेक न करें।\n\n"
+                "**Class 8th result is about to go live.**\n"
+                "Please wait patiently and avoid refreshing repeatedly.",
+                reply_markup=keyboard1
+            )
+
+        elif time(16, 30) <= now.time() <= time(18, 0):
+            await message.reply_text(
+                "**कक्षा 8 का परिणाम अब जारी कर दिया गया है!**\n"
+                "नीचे दिए गए विकल्प से अपना रोल नंबर डालकर तुरंत रिजल्ट देखें।\n\n"
+                "**Class 8th result is now live!**\n"
+                "Enter your roll number below to view it instantly.",
+                reply_markup=keyboard1
+            )
+    elif now.date() == datetime(2025, 5, 24, tzinfo=ist).date():
+        await message.reply_text(
+                "**कल कक्षा 8 का परिणाम जारी किया जायेगा!**\n"
+                "परिणाम शाम **5 बजे तक** आएगा। कृपया रोल नंबर तैयार रखें।\n\n"
+                "**Class 8th result will be declared tomorrow by 5 PM.**\n"
+                "Please keep your roll number ready.",
+                reply_markup=keyboard1
+        )
+    await message.reply_text(
+            "Welcome to **SingodiyaTech Result Bot!**\n\n"
+            "Check your Rajasthan Board Result for 10th, 12th, and 8th in one click.\n\n"
+            "**Steps:**\n"
+            "1. Tap the button below\n"
+            "2. Enter your roll number\n"
+            "3. Get your marks instantly as PDF or online view.\n\n"
+            "Use /help command to get help.\n"
+            "If current server getting failed, please use /Server2 command.",
+            reply_markup=keyboard
+        )
+        
 @app.on_message(filters.command(["NAMEWISE", "NameWise" , "Namewise","namewise"]) & filters.private)
 async def start_handler(client, message):
     text = """
