@@ -37,9 +37,9 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInf
 @app.on_message(filters.command("start") & filters.private)
 async def start_handler(client, message):
     text = (
-        "Welcome to *SingodiyaTech Result Bot!*\n\n"
+        "Welcome to **SingodiyaTech Result Bot!**\n\n"
         "Check your Rajasthan Board Result for 10th & 12th in one click.\n\n"
-        "*Steps:*\n"
+        "**Steps:**\n"
         "1. Tap the button below\n"
         "2. Enter your roll number\n"
         "3. Get your marks instantly as PDF or online view.\n"
@@ -111,7 +111,7 @@ Check your Rajasthan Board Result for 10th & 12th in one click by name.\n\n
 @app.on_message(filters.command(["help", "Help"]) & filters.private )
 async def help_handler(client, message):
     await message.reply_text(
-        "Help Guide\n\n"
+        "**Help Guide**\n\n"
         "• Use 10th or 12th buttons to open result web apps.\n"
         "• Use /NameWise to get your result by Name.\n"
         "• Use /SchoolWise to get all school result in one table.\n"
@@ -122,15 +122,15 @@ async def help_handler(client, message):
         "• Use /About for revaluation or rechecking details.\n"
         "• Use /Feedback to leave a feedback about Bot\n"
         "• Use /ContactAdmin to see all support options available.\n\n"
-        "• Still need help? Contact our support @aks979."
+        "• **Still need help? Contact our support @aks979.**"
     )
 @app.on_message(filters.command(["About", "about"]) & filters.private )
 async def about_handler(client, message):
     await message.reply_text(
         "About This Bot\n\n"
         "This bot helps students access their results and exam info quickly.\n"
-        "Maintained by: @Aks979\n"
-        "Powered by: SingodiyaTech"
+        "**Maintained by:** @Aks979\n"
+        "**Powered by**: SingodiyaTech"
     )
 
 
@@ -277,7 +277,7 @@ async def server3_handler(client, message):
     ])
 
     text = (
-        "Welcome to **SingodiyaTech Result Bot!**\n\n **Server 2 \n\n**"
+        "Welcome to **SingodiyaTech Result Bot!**\n\n **Server 3 \n\n**"
         "Check your Rajasthan Board Result for 10th & 12th in one click.\n\n"
         "Steps:\n"
         "1. Tap the button below\n"
