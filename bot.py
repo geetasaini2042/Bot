@@ -94,13 +94,18 @@ async def start_handler(client, message):
         reply_markup=keyboard
     )
     if now.date() == datetime(2025, 5, 25, tzinfo=ist).date() and time(7, 0) <= now.time() <= time(16, 0):
-        special_msg = "\n\n**Aaj Kaksha 8 ka result aayega.**\nResult dopahar 5 baje tak jaari hoga."
+        special_msg = (
+    "\n\n**आज कक्षा 8 का परिणाम जारी किया जायेगा! **\n"
+    "परिणाम शाम **5 बजे तक** जारी किया जाएगा। नीचे अपना रोल नंबर डालकर परिणाम जांचें।\n\n"
+    "**Today the Class 8th result will be declared!**\n"
+    "The result will be available by **5:00 PM**. Please enter your roll number below on time to check it."
+)
         await message.reply_text(
         special_msg,
         reply_markup=keyboard1
         )
-    elif now.date() == datetime(2025, 5, 25, tzinfo=ist).date() and time(16, 0) <= now.time() <= time(17, 0):
-        special_msg = "\n\n**Aaj Kaksha 8 ka result aayega.**\nResult dopahar 5 baje tak jaari hoga."
+    elif now.date() == datetime(2025, 5, 25, tzinfo=ist).date() and time(16, 0) <= now.time() <= time(16, 30):
+        special_msg = "\n\n**कक्षा 8 का रिजल्ट कुछ ही देर में जारी किया जाएगा. कृपया प्रतीक्षा करें..**"
         await message.reply_text(
         special_msg,
         reply_markup=keyboard1
