@@ -102,7 +102,7 @@ async def start_handler(client, message):
             await message.reply_text(
                 "**कक्षा 8 का रिजल्ट कुछ ही देर में जारी किया जाएगा...**\n"
                 "कृपया इंतजार करें..\n\n"
-                "Wait For 5 PM.."
+                "**Wait For 5 PM..**\n\n"
                 "**Class 8th result is about to go live.**\n"
                 "Please wait patiently and avoid refreshing repeatedly.",
                 reply_markup=keyboard1
