@@ -58,6 +58,17 @@ async def start_handler(client, message):
             [InlineKeyboardButton("8th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/"))]
         ]
     )
+    await message.reply_text(
+            "Welcome to **SingodiyaTech Result Bot!**\n\n"
+            "Check your Rajasthan Board Result for 10th, 12th, and 8th in one click.\n\n"
+            "**Steps:**\n"
+            "1. Tap the button below\n"
+            "2. Enter your roll number\n"
+            "3. Get your marks instantly as PDF or online view.\n\n"
+            "Use /help command to get help.\n"
+            "If current server getting failed, please use /Server2 command.",
+            reply_markup=keyboard
+        )
 
     if now.date() == datetime(2025, 5, 26, tzinfo=ist).date():
         if time(1, 0) <= now.time() < time(10, 0):
@@ -111,17 +122,6 @@ async def start_handler(client, message):
                 "**Class 8th result will be declared tomorrow by 5 PM.**\n"
                 "Please keep your roll number ready.",
                 reply_markup=keyboard1
-        )
-    await message.reply_text(
-            "Welcome to **SingodiyaTech Result Bot!**\n\n"
-            "Check your Rajasthan Board Result for 10th, 12th, and 8th in one click.\n\n"
-            "**Steps:**\n"
-            "1. Tap the button below\n"
-            "2. Enter your roll number\n"
-            "3. Get your marks instantly as PDF or online view.\n\n"
-            "Use /help command to get help.\n"
-            "If current server getting failed, please use /Server2 command.",
-            reply_markup=keyboard
         )
         
 @app.on_message(filters.command(["NAMEWISE", "NameWise" , "Namewise","namewise"]) & filters.private)
