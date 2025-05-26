@@ -59,7 +59,7 @@ async def start_handler(client, message):
         ]
     )
 
-    if now.date() == datetime(2025, 5, 25, tzinfo=ist).date():
+    if now.date() == datetime(2025, 5, 26, tzinfo=ist).date():
         if time(1, 0) <= now.time() < time(10, 0):
             await message.reply_text(
                 "**आज कक्षा 8 का परिणाम जारी किया जायेगा!**\n"
@@ -104,7 +104,7 @@ async def start_handler(client, message):
                 "Enter your roll number below to view it instantly.",
                 reply_markup=keyboard1
             )
-    elif now.date() == datetime(2025, 5, 24, tzinfo=ist).date():
+    elif now.date() == datetime(2025, 5, 25, tzinfo=ist).date():
         await message.reply_text(
                 "**कल कक्षा 8 का परिणाम जारी किया जायेगा!**\n"
                 "परिणाम शाम **5 बजे तक** आएगा। कृपया रोल नंबर तैयार रखें।\n\n"
