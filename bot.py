@@ -312,7 +312,8 @@ async def server2_handler(client, message):
         ],
         [
             InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/Server2"))
-        ]
+        ],
+        [InlineKeyboardButton("8th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/Server2"))]
     ])
 
     text = (
