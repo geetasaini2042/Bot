@@ -75,7 +75,7 @@ async def start_handler(client, message):
         if time(1, 0) <= now.time() < time(10, 0):
             await message.reply_text(
                 "**आज कक्षा 10 का परिणाम जारी किया जायेगा!**\n\n"
-                "परिणाम शाम **4:00 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकल सकते हैं।\n\n"
+                "परिणाम शाम **4:00 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकाल सकते हैं।\n\n"
                 "**Class 10th result will be declared today by 4:00 PM.**\n"
                 "Please keep your roll number ready.",
                 reply_markup=keyboard1
@@ -122,7 +122,7 @@ async def start_handler(client, message):
     elif now.date() == datetime(2025, 5, 27, tzinfo=ist).date():
         await message.reply_text(
                 "**कल कक्षा 10 का परिणाम जारी किया जायेगा!**\n\n"
-                "परिणाम शाम **4:00 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकल सकते हैं।\n\n"
+                "परिणाम शाम **4:00 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकाल सकते हैं।\n\n"
                 "**Class 10th result will be declared tomorrow by 4:00 PM.**\n"
                 "Please keep your roll number(Or Name) ready.",
                 reply_markup=keyboard1
