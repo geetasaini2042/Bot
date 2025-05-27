@@ -71,7 +71,7 @@ async def start_handler(client, message):
             reply_markup=keyboard
         )
 
-    if now.date() == datetime(2025, 5, 27, tzinfo=ist).date():
+    if now.date() == datetime(2025, 5, 28, tzinfo=ist).date():
         if time(1, 0) <= now.time() < time(10, 0):
             await message.reply_text(
                 "**आज कक्षा 10 का परिणाम जारी किया जायेगा!**\n"
