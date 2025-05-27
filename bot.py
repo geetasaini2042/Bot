@@ -75,8 +75,8 @@ async def start_handler(client, message):
         if time(1, 0) <= now.time() < time(10, 0):
             await message.reply_text(
                 "**आज कक्षा 10 का परिणाम जारी किया जायेगा!**\n\n"
-                "परिणाम शाम **4:30 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकल सकते हैं।\n\n"
-                "**Class 10th result will be declared today by 4:30 PM.**\n"
+                "परिणाम शाम **4:00 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकल सकते हैं।\n\n"
+                "**Class 10th result will be declared today by 4:00 PM.**\n"
                 "Please keep your roll number ready.",
                 reply_markup=keyboard1
             )
@@ -84,18 +84,18 @@ async def start_handler(client, message):
         elif time(10, 0) <= now.time() < time(13, 0):
             await message.reply_text(
                 "**कक्षा 10 का परिणाम दोपहर बाद जारी किया जाएगा।**\n"
-                "शाम **4:30 बजे तक** परिणाम आएगा कृपया प्रतीक्षा करें।\n\n"
+                "शाम **4:00 बजे तक** परिणाम आएगा कृपया प्रतीक्षा करें।\n\n"
                 "**Class 10th result will be released post noon.**\n"
-                "Expected by 4:30 PM. Please stay tuned.",
+                "Expected by 4:00 PM. Please stay tuned.",
                 reply_markup=keyboard1
             )
 
         elif time(13, 0) <= now.time() < time(16, 0):
             await message.reply_text(
                 "**कक्षा 10 का परिणाम जल्द ही जारी किया जाएगा!**\n"
-                "शाम **4:30 बजे** तक परिणाम देखने के लिए तैयार रहें।\n\n"
+                "शाम **4:00 बजे** तक परिणाम देखने के लिए तैयार रहें।\n\n"
                 "**Class 10th result is coming soon!**\n"
-                "Be ready to check it by 4:30 PM.",
+                "Be ready to check it by 4:00 PM.",
                 reply_markup=keyboard1
             )
 
@@ -103,7 +103,7 @@ async def start_handler(client, message):
             await message.reply_text(
                 "**कक्षा 10 का रिजल्ट कुछ ही देर में जारी किया जाएगा...**\n"
                 "कृपया इंतजार करें..\n\n"
-                "**Wait For 4:30 PM..**\n\n"
+                "**Wait For 4:00 PM..**\n\n"
                 "**Class 10th result is about to go live.**\n"
                 "Please wait patiently and avoid refreshing repeatedly.",
                 reply_markup=keyboard1
