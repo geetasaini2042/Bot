@@ -99,7 +99,7 @@ async def start_handler(client, message):
                 reply_markup=keyboard1
             )
 
-        elif time(16, 0) <= now.time() < time(16, 58):
+        elif time(16, 0) <= now.time() < time(16, 28):
             await message.reply_text(
                 "**कक्षा 10 का रिजल्ट कुछ ही देर में जारी किया जाएगा...**\n"
                 "कृपया इंतजार करें..\n\n"
@@ -109,7 +109,7 @@ async def start_handler(client, message):
                 reply_markup=keyboard1
             )
 
-        elif time(16, 57) <= now.time() <= time(21, 0):
+        elif time(16, 29) <= now.time() <= time(22, 0):
             await message.reply_text(
                 "**कक्षा 10 का परिणाम अब जारी कर दिया गया है!**\n"
                 "नीचे दिए गए विकल्प से अपना रोल नंबर डालकर तुरंत रिजल्ट देखें।\n\n"
