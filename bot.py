@@ -72,58 +72,60 @@ async def start_handler(client, message):
             reply_markup=keyboard
         )
 
-    if now.date() == datetime(2025, 5, 26, tzinfo=ist).date():
+    if now.date() == datetime(2025, 5, 27, tzinfo=ist).date():
         if time(1, 0) <= now.time() < time(10, 0):
             await message.reply_text(
-                "**आज कक्षा 8 का परिणाम जारी किया जायेगा!**\n"
-                "परिणाम शाम **5 बजे तक** आएगा। कृपया रोल नंबर तैयार रखें।\n\n"
-                "**Class 8th result will be declared today by 5 PM.**\n"
+                "**आज कक्षा 10 का परिणाम जारी किया जायेगा!**\n"
+                "परिणाम शाम **4:30 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकल सकते हैं।\n\n"
+                "**Class 10th result will be declared today by 4:30 PM.**\n"
                 "Please keep your roll number ready.",
                 reply_markup=keyboard1
             )
 
         elif time(10, 0) <= now.time() < time(13, 0):
             await message.reply_text(
-                "**कक्षा 8 का परिणाम दोपहर बाद जारी किया जाएगा।**\n"
-                "शाम **5 बजे तक** परिणाम आने की संभावना है। कृपया प्रतीक्षा करें।\n\n"
+                "**कक्षा 10 का परिणाम दोपहर बाद जारी किया जाएगा।**\n"
+                "शाम **4:30 बजे तक** परिणाम आएगा कृपया प्रतीक्षा करें।\n\n"
                 "**Class 8th result will be released post noon.**\n"
-                "Expected by 5:00 PM. Please stay tuned.",
+                "Expected by 4:30 PM. Please stay tuned.",
                 reply_markup=keyboard1
             )
 
         elif time(13, 0) <= now.time() < time(16, 0):
             await message.reply_text(
-                "**कक्षा 8 का परिणाम जल्द ही जारी किया जाएगा!**\n"
-                "शाम **5 बजे** तक परिणाम देखने के लिए तैयार रहें।\n\n"
-                "**Class 8th result is coming soon!**\n"
-                "Be ready to check it by 5:00 PM.",
+                "**कक्षा 10 का परिणाम जल्द ही जारी किया जाएगा!**\n"
+                "शाम **4:30 बजे** तक परिणाम देखने के लिए तैयार रहें।\n\n"
+                "**Class 10th result is coming soon!**\n"
+                "Be ready to check it by 4:30 PM.",
                 reply_markup=keyboard1
             )
 
         elif time(16, 0) <= now.time() < time(16, 58):
             await message.reply_text(
-                "**कक्षा 8 का रिजल्ट कुछ ही देर में जारी किया जाएगा...**\n"
+                "**कक्षा 10 का रिजल्ट कुछ ही देर में जारी किया जाएगा...**\n"
                 "कृपया इंतजार करें..\n\n"
-                "**Wait For 5 PM..**\n\n"
-                "**Class 8th result is about to go live.**\n"
+                "**Wait For 4:30 PM..**\n\n"
+                "**Class 10th result is about to go live.**\n"
                 "Please wait patiently and avoid refreshing repeatedly.",
                 reply_markup=keyboard1
             )
 
         elif time(16, 57) <= now.time() <= time(21, 0):
             await message.reply_text(
-                "**कक्षा 8 का परिणाम अब जारी कर दिया गया है!**\n"
+                "**कक्षा 10 का परिणाम अब जारी कर दिया गया है!**\n"
                 "नीचे दिए गए विकल्प से अपना रोल नंबर डालकर तुरंत रिजल्ट देखें।\n\n"
-                "**Class 8th result is now live!**\n"
-                "Enter your roll number below to view it instantly.",
+                "नाम से अपना परिणाम देखने के लिए कृपया /NameWise कमांड भेजे. \n\n"
+                "**Class 10th result is now live!**\n"
+                "Enter your roll number below to view it instantly.\n\n"
+                "For NameWise Result Please Use command /NameWise",
                 reply_markup=keyboard1
             )
-    elif now.date() == datetime(2025, 5, 25, tzinfo=ist).date():
+    elif now.date() == datetime(2025, 5, 27, tzinfo=ist).date():
         await message.reply_text(
-                "**कल कक्षा 8 का परिणाम जारी किया जायेगा!**\n"
-                "परिणाम शाम **5 बजे तक** आएगा। कृपया रोल नंबर तैयार रखें।\n\n"
-                "**Class 8th result will be declared tomorrow by 5 PM.**\n"
-                "Please keep your roll number ready.",
+                "**कल कक्षा 10 का परिणाम जारी किया जायेगा!**\n"
+                "परिणाम शाम **4:30 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकल सकते हैं।\n\n"
+                "**Class 10th result will be declared tomorrow by 4:30 PM.**\n"
+                "Please keep your roll number(Or Name) ready.",
                 reply_markup=keyboard1
         )
         
