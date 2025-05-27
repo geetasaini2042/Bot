@@ -74,7 +74,7 @@ async def start_handler(client, message):
     if now.date() == datetime(2025, 5, 28, tzinfo=ist).date():
         if time(1, 0) <= now.time() < time(10, 0):
             await message.reply_text(
-                "**आज कक्षा 10 का परिणाम जारी किया जायेगा!**\n"
+                "**आज कक्षा 10 का परिणाम जारी किया जायेगा!**\n\n"
                 "परिणाम शाम **4:30 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकल सकते हैं।\n\n"
                 "**Class 10th result will be declared today by 4:30 PM.**\n"
                 "Please keep your roll number ready.",
@@ -85,7 +85,7 @@ async def start_handler(client, message):
             await message.reply_text(
                 "**कक्षा 10 का परिणाम दोपहर बाद जारी किया जाएगा।**\n"
                 "शाम **4:30 बजे तक** परिणाम आएगा कृपया प्रतीक्षा करें।\n\n"
-                "**Class 8th result will be released post noon.**\n"
+                "**Class 10th result will be released post noon.**\n"
                 "Expected by 4:30 PM. Please stay tuned.",
                 reply_markup=keyboard1
             )
@@ -121,7 +121,7 @@ async def start_handler(client, message):
             )
     elif now.date() == datetime(2025, 5, 27, tzinfo=ist).date():
         await message.reply_text(
-                "**कल कक्षा 10 का परिणाम जारी किया जायेगा!**\n"
+                "**कल कक्षा 10 का परिणाम जारी किया जायेगा!**\n\n"
                 "परिणाम शाम **4:30 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकल सकते हैं।\n\n"
                 "**Class 10th result will be declared tomorrow by 4:30 PM.**\n"
                 "Please keep your roll number(Or Name) ready.",
@@ -286,9 +286,9 @@ async def contact_admin_handler(client, message):
 @app.on_message(filters.command(["SchoolWise", "school_wise"]) & filters.private)
 async def school_wise_handler(client, message):
     keyboard = InlineKeyboardMarkup([
-        [
-            InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/SchoolWise"))
-        ],
+       # [
+         #   InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/SchoolWise"))
+       # ],
         [
             InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/SchoolWise"))
         ]
@@ -305,6 +305,7 @@ async def school_wise_handler(client, message):
     )
 
     await message.reply_text(text, reply_markup=keyboard)
+    #await message.reply_text("SchoolWise Result Will Be available on 6:00 PM")
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 @app.on_message(filters.command(["Server2", "server2"]) & filters.private)
