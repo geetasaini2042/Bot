@@ -48,15 +48,14 @@ async def start_handler(client, message):
     now = datetime.now(ist)
     keyboard1 = InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton("Check Result Now", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/"))]
+            [InlineKeyboardButton("Check Result Now", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/"))]
         ]
     )
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/"))],
             [InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/"))],
-            [InlineKeyboardButton("8th Server 1", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/")),
-            InlineKeyboardButton("8th Server 2", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/Server2"))]
+            [InlineKeyboardButton("8th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/Server2"))]
 
         ]
     )
