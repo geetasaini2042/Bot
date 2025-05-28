@@ -54,7 +54,9 @@ async def start_handler(client, message):
     keyboard2 = InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton("10th Server 1", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/"))],
-            [InlineKeyboardButton("10th Server 2", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/Server2"))]
+            [InlineKeyboardButton("10th Server 2", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/Server2"))],
+            [InlineKeyboardButton("10th Name Wise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/NameWise"))], 
+            [InlineKeyboardButton("10th School Wise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/SchoolWise"))]
         
         ]
     )
