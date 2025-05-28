@@ -293,9 +293,9 @@ async def contact_admin_handler(client, message):
 @app.on_message(filters.command(["SchoolWise", "school_wise"]) & filters.private)
 async def school_wise_handler(client, message):
     keyboard = InlineKeyboardMarkup([
-       # [
-         #   InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/SchoolWise"))
-       # ],
+        [
+            InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/SchoolWise"))
+        ],
         [
             InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/SchoolWise"))
         ]
