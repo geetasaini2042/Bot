@@ -51,6 +51,13 @@ async def start_handler(client, message):
             [InlineKeyboardButton("Check Result Now", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/"))]
         ]
     )
+    keyboard2 = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton("10th Server 1", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/"))],
+            [InlineKeyboardButton("10th Server 2", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/Server2"))]
+        
+        ]
+    )
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/"))],
@@ -90,7 +97,7 @@ async def start_handler(client, message):
                 reply_markup=keyboard1
             )
 
-        elif time(13, 0) <= now.time() < time(16, 0):
+        elif time(13, 0) <= now.time() < time(15, 0):
             await message.reply_text(
                 "**कक्षा 10 का परिणाम जल्द ही जारी किया जाएगा!**\n"
                 "शाम **4:00 बजे** तक परिणाम देखने के लिए तैयार रहें।\n\n"
@@ -99,7 +106,7 @@ async def start_handler(client, message):
                 reply_markup=keyboard1
             )
 
-        elif time(16, 0) <= now.time() < time(16, 28):
+        elif time(15, 0) <= now.time() < time(15,58):
             await message.reply_text(
                 "**कक्षा 10 का रिजल्ट कुछ ही देर में जारी किया जाएगा...**\n"
                 "कृपया इंतजार करें..\n\n"
@@ -109,7 +116,7 @@ async def start_handler(client, message):
                 reply_markup=keyboard1
             )
 
-        elif time(16, 29) <= now.time() <= time(22, 0):
+        elif time(16, 0) <= now.time() <= time(22, 0):
             await message.reply_text(
                 "**कक्षा 10 का परिणाम अब जारी कर दिया गया है!**\n"
                 "नीचे दिए गए विकल्प से अपना रोल नंबर डालकर तुरंत रिजल्ट देखें।\n\n"
@@ -117,7 +124,7 @@ async def start_handler(client, message):
                 "**Class 10th result is now live!**\n"
                 "Enter your roll number below to view it instantly.\n\n"
                 "For NameWise Result Please Use command /NameWise",
-                reply_markup=keyboard1
+                reply_markup=keyboard2
             )
     elif now.date() == datetime(2025, 5, 27, tzinfo=ist).date():
         await message.reply_text(
