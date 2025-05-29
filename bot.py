@@ -48,15 +48,14 @@ async def start_handler(client, message):
     now = datetime.now(ist)
     keyboard1 = InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton("Check Result Now", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/"))]
+            [InlineKeyboardButton("Check Result Now", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/5th/"))]
         ]
     )
     keyboard2 = InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton("10th Server 1", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/"))],
-            [InlineKeyboardButton("10th Server 2", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/Server2"))],
-            [InlineKeyboardButton("10th Name Wise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/NameWise"))], 
-            [InlineKeyboardButton("10th School Wise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/SchoolWise"))]
+            [InlineKeyboardButton("5th Server 1", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/5th/"))],
+            [InlineKeyboardButton("5th Server 2", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/5th/Server2"))]
+            
         
         ]
     )
@@ -64,13 +63,14 @@ async def start_handler(client, message):
         inline_keyboard=[
             [InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/"))],
             [InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/"))],
-            [InlineKeyboardButton("8th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/Server2"))]
+            [InlineKeyboardButton("8th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/Server2"))],
+            [InlineKeyboardButton("5th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/5th/Server2"))]
 
         ]
     )
     await message.reply_text(
             "Welcome to **SingodiyaTech Result Bot!**\n\n"
-            "Check your Rajasthan Board Result for 10th, 12th, and 8th in one click.\n\n"
+            "Check your Rajasthan Board Result for 10th, 12th, 8th and 5th in one click.\n\n"
             "**Steps:**\n"
             "1. Tap the button below\n"
             "2. Enter your roll number\n"
@@ -80,60 +80,58 @@ async def start_handler(client, message):
             reply_markup=keyboard
         )
 
-    if now.date() == datetime(2025, 5, 28, tzinfo=ist).date():
-        if time(1, 0) <= now.time() < time(10, 0):
+    if now.date() == datetime(2025, 5, 30, tzinfo=ist).date():
+        if time(1, 0) <= now.time() < time(8, 0):
             await message.reply_text(
-                "**आज कक्षा 10 का परिणाम जारी किया जायेगा!**\n\n"
-                "परिणाम शाम **4:00 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकाल सकते हैं।\n\n"
-                "**Class 10th result will be declared today by 4:00 PM.**\n"
+                "**आज कक्षा 5 का परिणाम जारी किया जायेगा!**\n\n"
+                "परिणाम दोपहर **12:30 बजे तक** आएगा। विद्यार्थी अपने Roll Number से अपना Result निकाल सकते हैं।\n\n"
+                "**Class 5th result will be declared today by 12:30 PM.**\n"
                 "Please keep your roll number ready.",
                 reply_markup=keyboard1
             )
 
-        elif time(10, 0) <= now.time() < time(13, 0):
+        elif time(8, 0) <= now.time() < time(10, 30):
             await message.reply_text(
-                "**कक्षा 10 का परिणाम दोपहर बाद जारी किया जाएगा।**\n"
-                "शाम **4:00 बजे तक** परिणाम आएगा कृपया प्रतीक्षा करें।\n\n"
-                "**Class 10th result will be released post noon.**\n"
-                "Expected by 4:00 PM. Please stay tuned.",
+                "**कक्षा 5 का परिणाम दोपहर बाद जारी किया जाएगा।**\n"
+                "दोपहर **12:30 बजे तक** परिणाम आएगा कृपया प्रतीक्षा करें...\n\n"
+                "**Class 5th result will be released post noon.**\n"
+                "Expected by 12:30 PM. Please stay tuned.",
                 reply_markup=keyboard1
             )
 
-        elif time(13, 0) <= now.time() < time(15, 0):
+        elif time(10, 30) <= now.time() < time(11, 45):
             await message.reply_text(
-                "**कक्षा 10 का परिणाम जल्द ही जारी किया जाएगा!**\n"
-                "शाम **4:00 बजे** तक परिणाम देखने के लिए तैयार रहें।\n\n"
-                "**Class 10th result is coming soon!**\n"
-                "Be ready to check it by 4:00 PM.",
+                "**कक्षा 5 का परिणाम जल्द ही जारी किया जाएगा!**\n"
+                "दोपहर **12:30 बजे** तक परिणाम देखने के लिए तैयार रहें।\n\n"
+                "**Class 5th result is coming soon!**\n"
+                "Be ready to check it by 12:30 PM.",
                 reply_markup=keyboard1
             )
 
-        elif time(15, 0) <= now.time() < time(15,58):
+        elif time(11, 45) <= now.time() < time(12,40):
             await message.reply_text(
-                "**कक्षा 10 का रिजल्ट कुछ ही देर में जारी किया जाएगा...**\n"
+                "**कक्षा 5 का रिजल्ट कुछ ही देर में जारी किया जाएगा...**\n"
                 "कृपया इंतजार करें..\n\n"
-                "**Wait For 4:00 PM..**\n\n"
-                "**Class 10th result is about to go live.**\n"
+                "**Please Wait...**\n\n"
+                "**Class 5th result is about to go live.**\n"
                 "Please wait patiently and avoid refreshing repeatedly.",
-                reply_markup=keyboard1
-            )
-
-        elif time(15, 58) <= now.time() <= time(22, 0):
-            await message.reply_text(
-                "**कक्षा 10 का परिणाम अब जारी कर दिया गया है!**\n"
-                "नीचे दिए गए विकल्प से अपना रोल नंबर डालकर तुरंत रिजल्ट देखें।\n\n"
-                "नाम से अपना परिणाम देखने के लिए कृपया /NameWise कमांड भेजे. \n\n"
-                "**Class 10th result is now live!**\n"
-                "Enter your roll number below to view it instantly.\n\n"
-                "For NameWise Result Please Use command /NameWise",
                 reply_markup=keyboard2
             )
-    elif now.date() == datetime(2025, 5, 27, tzinfo=ist).date():
+
+        elif time(12, 40) <= now.time() <= time(22, 0):
+            await message.reply_text(
+                "**कक्षा 5 का परिणाम अब जारी कर दिया गया है!**\n"
+                "नीचे दिए गए विकल्प से अपना रोल नंबर डालकर तुरंत रिजल्ट देखें।\n\n"                
+                "**Class 5th result is now live!**\n"
+                "Enter your roll number below to view it instantly.\n\n",
+                reply_markup=keyboard2
+            )
+    elif now.date() == datetime(2025, 5, 29, tzinfo=ist).date():
         await message.reply_text(
-                "**कल कक्षा 10 का परिणाम जारी किया जायेगा!**\n\n"
-                "परिणाम शाम **4:00 बजे तक** आएगा। विद्यार्थी अपने नाम और Roll Number से अपना Result निकाल सकते हैं।\n\n"
-                "**Class 10th result will be declared tomorrow by 4:00 PM.**\n"
-                "Please keep your roll number(Or Name) ready.",
+                "**कल कक्षा 5 का परिणाम जारी किया जायेगा!**\n\n"
+                "परिणाम दोपहर **12:30 बजे तक** आएगा। विद्यार्थी अपने Roll Number से अपना Result निकाल सकते हैं।\n\n"
+                "**Class 5th result will be declared tomorrow by 12:30 PM.**\n"
+                "Please keep your roll number ready.",
                 reply_markup=keyboard1
         )
         
@@ -212,12 +210,13 @@ async def old_result_handler(client, message):
             InlineKeyboardButton("12th RollWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/")),
             InlineKeyboardButton("12th NameWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/NameWise"))
         ],
-        [
-                InlineKeyboardButton(
-                    "8th Result 2025",
-                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/")
-                )
-            ]
+        [ 
+            InlineKeyboardButton("8th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/Server2"))
+        ],
+        [ 
+            InlineKeyboardButton("5th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/5th/Server2"))
+        ]
+
     ])
     
     await message.reply_text(
