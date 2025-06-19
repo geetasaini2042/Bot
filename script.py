@@ -23,3 +23,4 @@ def run_flask():
 
 def run_bot():
     app.run()
+    print("Stopped\n")
