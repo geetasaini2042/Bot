@@ -1,145 +1,165 @@
-import os
+# bot.py
+from script import app, run_flask, run_bot
 import threading
-from flask import Flask
 from pyrogram import Client, filters
-from dotenv import load_dotenv
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
-# Load environment variables
-load_dotenv()
-
-# Get credentials from environment
-API_ID = int(os.getenv("API_ID"))
-API_HASH = os.getenv("API_HASH")
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-
-# Create Flask app
-flask_app = Flask(__name__)
-
-@flask_app.route("/")
-def home():
-    return "Flask server is running."
-
-# Define run_flask function
-def run_flask():
-    flask_app.run(host="0.0.0.0", port=5000)
-
-# Create Pyrogram Client
-app = Client("my_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-
-# Define run_bot function
-def run_bot():
-    app.run()
-
-# Pyrogram handler
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
-
 from datetime import datetime, time
 import pytz
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
+import rajasthan , uttarpradesh, andhrapradesh
+
+year = "2025"
+ADMINS = [6150091802]
+home_keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton("Rajasthan Results",callback_data="rj_board_results")
+            ],   
+                        [
+                InlineKeyboardButton("UP Board Results",callback_data="up_board_result")
+            ],
+                        [
+                InlineKeyboardButton("AP Board Results",callback_data="ap_board_result")
+            ]
 
 
-
-from datetime import datetime, time
-import pytz
-
-@app.on_message(filters.command("start") & filters.private)
+        ]
+    )
+board_keyboard = InlineKeyboardMarkup([
+    [  # Rajasthan row
+        InlineKeyboardButton(
+            "Raj 10th",
+            web_app=WebAppInfo(
+                url=f"https://geetasaini2042.github.io/Results/RAJ/{year}/10th/"
+            )
+        ),
+        InlineKeyboardButton(
+            "Raj 12th",
+            web_app=WebAppInfo(
+                url=f"https://geetasaini2042.github.io/Results/RAJ/{year}/12th/"
+            )
+        ),
+        InlineKeyboardButton(
+            "...",
+            callback_data="rj_board_result"
+        )
+    ],
+    [  # UP row
+        InlineKeyboardButton(
+            "UP 10th",
+            web_app=WebAppInfo(
+                url=f"https://geetasaini2042.github.io/Results/UP/{year}/10th/"
+            )
+        ),
+        InlineKeyboardButton(
+            "UP 12th",
+            web_app=WebAppInfo(
+                url=f"https://geetasaini2042.github.io/Results/UP/{year}/12th/"
+            )
+        ),
+        InlineKeyboardButton(
+            "...",
+            callback_data="up_board_result"
+        )
+    ],
+    [  # AP row
+        InlineKeyboardButton(
+            "AP 10th",
+            web_app=WebAppInfo(
+                url=f"https://geetasaini2042.github.io/Results/AP/{year}/10th/"
+            )
+        ),
+        InlineKeyboardButton(
+            "AP 11th",
+            web_app=WebAppInfo(
+                url=f"https://geetasaini2042.github.io/Results/AP/{year}/11th/"
+            )
+        ),
+        InlineKeyboardButton(
+            "...",
+            callback_data="ap_board_result"
+        )
+    ]
+])
+@app.on_message(filters.private & filters.command("start") & filters.regex(r"^/start$"))
 async def start_handler(client, message):
-    ist = pytz.timezone("Asia/Kolkata")
-    now = datetime.now(ist)
-    keyboard1 = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [InlineKeyboardButton("Check Result Now", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/5th/"))]
-        ]
-    )
-    keyboard2 = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [InlineKeyboardButton("5th Server 1", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/5th/"))],
-            [InlineKeyboardButton("5th Server 2", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/5th/Server2"))]
-            
-        
-        ]
-    )
-    keyboard = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/"))],
-            [InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/"))],
-            [InlineKeyboardButton("8th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/Server2"))],
-            [InlineKeyboardButton("5th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/5th/Server2"))]
-
-        ]
-    )
-    await message.reply_text(
+  await message.reply_text(
             "Welcome to **SingodiyaTech Result Bot!**\n\n"
-            "Check your Rajasthan Board Result for 10th, 12th, 8th and 5th in one click.\n\n"
+            "Check your Board Exam Results in one click.\n\n"
             "**Steps:**\n"
-            "1. Tap the button below\n"
+            "1. Choose Your Board below\n"
+            "2. Select Your Class."
+            "3. Get your marks instantly as PDF or online view.\n\n"
+            "Use help command to get help.\n",
+            reply_markup=home_keyboard
+        )
+@app.on_callback_query(filters.regex("^start$"))
+async def start_handler(client, callback_query):
+  await callback_query.message.edit_text(
+            "Welcome to **SingodiyaTech Result Bot!**\n\n"
+            "Check your Exam Results in one click.\n\n"
+            "**Steps:**\n"
+            "1. Choose Your Exam below\n"
+            "2. Select Your Board, University or Other Exam"
+            "3. Get your marks instantly as PDF or online view.\n\n"
+            "Use help command to get help.\n",
+            reply_markup=home_keyboard
+        )
+board_result_msg = (
+            "Welcome to **SingodiyaTech Result Bot!**\n\n"
+            "Check your state Board Result for 10th, 12th, 8th and 5th in one click.\n\n"
+            "**Steps:**\n"
+            "1. Choose your State and Class below\n"
             "2. Enter your roll number\n"
             "3. Get your marks instantly as PDF or online view.\n\n"
-            "Use /help command to get help.\n"
-            "If current server getting failed, please use /Server2 command.",
-            reply_markup=keyboard
-        )
+            "Use /board_help command to get help.\n")
 
-    if now.date() == datetime(2025, 5, 30, tzinfo=ist).date():
-        if time(1, 0) <= now.time() < time(8, 0):
-            await message.reply_text(
-                "**आज कक्षा 5 का परिणाम जारी किया जायेगा!**\n\n"
-                "परिणाम दोपहर **12:30 बजे तक** आएगा। विद्यार्थी अपने Roll Number से अपना Result निकाल सकते हैं।\n\n"
-                "**Class 5th result will be declared today by 12:30 PM.**\n"
-                "Please keep your roll number ready.",
-                reply_markup=keyboard1
-            )
+@app.on_message(filters.command(["board_exams", "school_boards"]) & filters.private)
+async def msg_handler(client, message):
+    await message.reply_text(board_result_msg,reply_markup=board_keyboard)
+@app.on_callback_query(filters.regex("^boards_results$"))
+async def board_result_query_handler(client, callback_query):
+  await callback_query.message.edit_text(board_result_msg,reply_markup=board_keyboard)
+  
+  
+@app.on_message(filters.command(["help", "HELP", "board_help"]) & filters.private)
+async def msg_handler(client, message):
+    msg = (
+            "Welcome to **SingodiyaTech Result Bot!**\n\n"
+            "Check your State Board Result for 10th, 12th, 8th and 5th in one click.\n\n"
+            "**Steps:**\n"
+            "1. Choose your State and Class below\n"
+            "2. Enter your roll number\n"
+            "3. Get your marks instantly as PDF or online view.\n\n"
+            "Use /board_help command to get help.\n"
+            "If current server getting failed, please Use /Server2 command.")
+    await message.reply_text(msg)
+@app.on_message(filters.command(["ContactAdmin", "contact_admin"]) & filters.private)
+async def contact_admin_handler(client, message):
+    admin_msg = (
+        "Contact Admin\n\n"
+        "• Mention your issue clearly.\n"
+        "• Admin: @aks979\n"
+        "• Support hours: 10 AM to 10 PM (Mon–Sun)"
+    )
+    await message.reply_text(admin_msg)
 
-        elif time(8, 0) <= now.time() < time(10, 30):
-            await message.reply_text(
-                "**कक्षा 5 का परिणाम दोपहर बाद जारी किया जाएगा।**\n"
-                "दोपहर **12:30 बजे तक** परिणाम आएगा कृपया प्रतीक्षा करें...\n\n"
-                "**Class 5th result will be released post noon.**\n"
-                "Expected by 12:30 PM. Please stay tuned.",
-                reply_markup=keyboard1
-            )
+@app.on_message(filters.command(["Feedback", "feedback"]) & filters.private )
+async def feedback_handler(client, message):
+    feedback_msg = (
+        "Feedback & Suggestions\n\n"
+        "We value your opinion!\n"
+        "• Send your feedback here: [SingodiyaTeck](t.me/mr_singodiyabot)\n"
+        "• Or email us at: raindropgbstar@gmail.com"
+    )
+    await message.reply_text(feedback_msg)
 
-        elif time(10, 30) <= now.time() < time(11, 45):
-            await message.reply_text(
-                "**कक्षा 5 का परिणाम जल्द ही जारी किया जाएगा!**\n"
-                "दोपहर **12:30 बजे** तक परिणाम देखने के लिए तैयार रहें।\n\n"
-                "**Class 5th result is coming soon!**\n"
-                "Be ready to check it by 12:30 PM.",
-                reply_markup=keyboard1
-            )
-
-        elif time(11, 45) <= now.time() < time(12,40):
-            await message.reply_text(
-                "**कक्षा 5 का रिजल्ट कुछ ही देर में जारी किया जाएगा...**\n"
-                "कृपया इंतजार करें..\n\n"
-                "**Please Wait...**\n\n"
-                "**Class 5th result is about to go live.**\n"
-                "Please wait patiently and avoid refreshing repeatedly.",
-                reply_markup=keyboard2
-            )
-
-        elif time(12, 40) <= now.time() <= time(22, 0):
-            await message.reply_text(
-                "**कक्षा 5 का परिणाम अब जारी कर दिया गया है!**\n"
-                "नीचे दिए गए विकल्प से अपना रोल नंबर डालकर तुरंत रिजल्ट देखें।\n\n"                
-                "**Class 5th result is now live!**\n"
-                "Enter your roll number below to view it instantly.\n\n",
-                reply_markup=keyboard2
-            )
-    elif now.date() == datetime(2025, 5, 29, tzinfo=ist).date():
-        await message.reply_text(
-                "**कल कक्षा 5 का परिणाम जारी किया जायेगा!**\n\n"
-                "परिणाम दोपहर **12:30 बजे तक** आएगा। विद्यार्थी अपने Roll Number से अपना Result निकाल सकते हैं।\n\n"
-                "**Class 5th result will be declared tomorrow by 12:30 PM.**\n"
-                "Please keep your roll number ready.",
-                reply_markup=keyboard1
-        )
+new_year = 2025
         
-@app.on_message(filters.command(["NAMEWISE", "NameWise" , "Namewise","namewise"]) & filters.private)
-async def start_handler(client, message):
+@app.on_message(filters.command(["NAMEWISE", "NameWise" , "Namewise", "namewise"]) & filters.private)
+async def startname_handler(client, message):
     text = """
 Welcome to **SingodiyaTech Result Bot!**\n\n            
-Check your Rajasthan Board Result for 10th & 12th in one click by name.\n\n
+Check your Board Result in one click by name.\n\n
 **NAMEWISE RESULT 2025**
 
 **Steps:**
@@ -151,96 +171,99 @@ Check your Rajasthan Board Result for 10th & 12th in one click by name.\n\n
 **Use /help command to get help.**
 """
 
-    keyboard = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [
-                InlineKeyboardButton(
-                    "10th Result 2025",
-                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/NameWise/")
-                )
-            ],
-            [
-                InlineKeyboardButton(
-                    "12th Result 2025",
-                    web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/NameWise")
-                )
-            ]
-        ]
-    )
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("RBSE Board", callback_data="rj_namewise")
+        ],
+        [
+            InlineKeyboardButton("UPMSP BOARD", callback_data="up_namewise")
+        ],
+        [InlineKeyboardButton("BSEAP BOARD", callback_data="ap_namewise")]
+    ])
 
     await message.reply_text(
         text,
         reply_markup=keyboard
     )
+@app.on_callback_query(filters.regex("^namewise$"))
+async def startname_handler(client, message):
+    text = """
+Welcome to **SingodiyaTech Result Bot!**\n\n            
+Check your Board Result in one click by name.\n\n
+**NAMEWISE RESULT 2025**
 
-@app.on_message(filters.command(["help", "Help"]) & filters.private )
-async def help_handler(client, message):
-    await message.reply_text(
-        "**Help Guide**\n\n"
-        "• Use 10th or 12th buttons to open result web apps.\n"
-        "• Use /NameWise to get your result by Name.\n"
-        "• Use /SchoolWise to get all school result in one table.\n"
-        "• Use /result2025 to get 2025 results\n"
-        "• Use /Server2 if the current server is not working\n"
-        "• Use /OldResult command to get Previous Years Results.\n"
-        "• Use /oldResultNamewise command to get Previous Years Results By Name.\n"
-        "• Use /About for revaluation or rechecking details.\n"
-        "• Use /Feedback to leave a feedback about Bot\n"
-        "• Use /ContactAdmin to see all support options available.\n\n"
-        "• **Still need help? Contact our support @aks979.**"
-    )
-@app.on_message(filters.command(["About", "about"]) & filters.private )
-async def about_handler(client, message):
-    await message.reply_text(
-        "About This Bot\n\n"
-        "This bot helps students access their results and exam info quickly.\n"
-        "**Maintained by:** @Aks979\n"
-        "**Powered by**: SingodiyaTech"
+**Steps:**
+1. Tap the button below
+2. Enter your Name
+3. Confirm your Name and Fathers Name.
+4. Click on get.
+             
+**Use /help command to get help.**
+"""
+
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("RBSE Board", callback_data="rj_namewise")
+        ],
+        [
+            InlineKeyboardButton("UPMSP BOARD", callback_data="up_namewise")
+        ],
+        [InlineKeyboardButton("BSEAP BOARD", callback_data="ap_namewise")]
+    ])
+
+    await message.message.edit_text(
+        text,
+        reply_markup=keyboard
     )
 
 
 @app.on_message(filters.command(["result2025", "Result2025"]) & filters.private)
-async def old_result_handler(client, message):
+async def new_result_handler(client, message):
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("10th RollWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/")),
-            InlineKeyboardButton("10th NameWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/NameWise"))
+            InlineKeyboardButton("RBSE Board", callback_data="rj_result2025")
         ],
         [
-            InlineKeyboardButton("12th RollWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/")),
-            InlineKeyboardButton("12th NameWise", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/NameWise"))
+            InlineKeyboardButton("UPMSP BOARD", callback_data="up_result2025")
         ],
-        [ 
-            InlineKeyboardButton("8th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/Server2"))
-        ],
-        [ 
-            InlineKeyboardButton("5th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/5th/Server2"))
-        ]
-
+        [InlineKeyboardButton("BSEAP BOARD", callback_data="ap_result2025")]
     ])
     
     await message.reply_text(
         "Chack Your Result for 2025.\n** Select a Button Below**\n\nEach button will open a web app for that specific Class.",
-        reply_markup=keyboard
+        reply_markup=board_keyboard
     )
 @app.on_message(filters.command(["OldResult", "old_result"]) & filters.private)
 async def old_result_handler(client, message):
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("2024 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2024/10th/")),
-            InlineKeyboardButton("2024 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2024/12th/"))
+            InlineKeyboardButton("RBSE Board", callback_data="rj_old")
         ],
         [
-            InlineKeyboardButton("2023 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2023/10th/")),
-            InlineKeyboardButton("2023 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2023/12th/"))
+            InlineKeyboardButton("UPMSP BOARD", callback_data="up_old")
         ],
-        [
-            InlineKeyboardButton("2022 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2022/10th/")),
-            InlineKeyboardButton("2022 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2022/12th/"))
-        ]
+        [InlineKeyboardButton("BSEAP BOARD", callback_data="ap_old")]
     ])
     
     await message.reply_text(
+        "Previous Year Results\n\n"
+        "Select year below to check 10th or 12th result:\n"
+        "Each button will open a web app for that specific year.",
+        reply_markup=keyboard
+    )
+@app.on_callback_query(filters.regex("^old$"))
+async def old_result_handler(client, message):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("RBSE Board", callback_data="rj_old")
+        ],
+        [
+            InlineKeyboardButton("UPMSP BOARD", callback_data="up_old")
+        ],
+        [InlineKeyboardButton("BSEAP BOARD", callback_data="ap_old")]
+    ])
+    
+    await message.message.edit_text(
         "Previous Year Results\n\n"
         "Select year below to check 10th or 12th result:\n"
         "Each button will open a web app for that specific year.",
@@ -250,61 +273,54 @@ async def old_result_handler(client, message):
 async def old_result_handler(client, message):
     text = """
 "**Previous Year Results (Name Wise)**
-Select year below to check 10th or 12th result:
-Each button will open a web app for that specific year (Name Wise).
+Select Board below to check 10th or 12th result:
+Each button will open that specific(Name Wise).
 """
+    
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("2024 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2024/10th/NameWise/")),
-            InlineKeyboardButton("2024 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2024/12th/NameWise/"))
+            InlineKeyboardButton("RBSE Board", callback_data="rj_oldname")
         ],
         [
-            InlineKeyboardButton("2023 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2023/10th/NameWise/")),
-            InlineKeyboardButton("2023 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2023/12th/NameWise/"))
+            InlineKeyboardButton("UPMSP BOARD", callback_data="up_oldname")
         ],
-        [
-            InlineKeyboardButton("2022 - 10th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2022/10th/NameWise/")),
-            InlineKeyboardButton("2022 - 12th", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2022/12th/NameWise/"))
-        ]
+        [InlineKeyboardButton("BSEAP BOARD", callback_data="ap_oldname")]
     ])
-    
     await message.reply_text(text,
         reply_markup=keyboard
     )
-@app.on_message(filters.command(["Feedback", "feedback"]) & filters.private )
-async def feedback_handler(client, message):
-    feedback_msg = (
-        "Feedback & Suggestions\n\n"
-        "We value your opinion!\n"
-        "• Send your feedback here: [SingodiyaTeck](t.me/mr_singodiyabot)\n"
-        "• Or email us at: raindropgbstar@gmail.com"
-    )
-    await message.reply_text(feedback_msg)
 
-@app.on_message(filters.command(["ContactAdmin", "contact_admin"]) & filters.private)
-async def contact_admin_handler(client, message):
-    admin_msg = (
-        "Contact Admin\n\n"
-        "• Mention your issue clearly.\n"
-        "• Admin: @aks979\n"
-        "• Support hours: 10 AM to 10 PM (Mon–Sun)"
+@app.on_callback_query(filters.regex("^oldname$"))
+async def old_result_handler(client, message):
+    text = """
+"**Previous Year Results (Name Wise)**
+Select Board below to check 10th or 12th result:
+Each button will open that specific(Name Wise).
+"""
+    
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("RBSE Board", callback_data="rj_oldname")
+        ],
+        [
+            InlineKeyboardButton("UPMSP BOARD", callback_data="up_oldname")
+        ],
+        [InlineKeyboardButton("BSEAP BOARD", callback_data="ap_oldname")]
+    ])
+    await message.message.edit_text(text,
+        reply_markup=keyboard
     )
-    await message.reply_text(admin_msg)
-
 @app.on_message(filters.command(["SchoolWise", "school_wise"]) & filters.private)
 async def school_wise_handler(client, message):
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/SchoolWise"))
-        ],
-        [
-            InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/SchoolWise"))
+            InlineKeyboardButton("Rajasthan Board", callback_data="rj_schoolwise")
         ]
     ])
 
     text = (
-        "Welcome to Rajasthan Result Bot!\n\n"
-        "Check your Rajasthan Board Result for 10th & 12th in one click.\n\n"
+        "Welcome to Result Bot!\n\n"
+        "Check your Board Result for 10th & 12th in one click.\n\n"
         "Steps:\n"
         "1. Tap the button below\n"
         "2. Enter your School's First Student Roll Number and Last Student Roll Number\n"
@@ -313,19 +329,37 @@ async def school_wise_handler(client, message):
     )
 
     await message.reply_text(text, reply_markup=keyboard)
-    #await message.reply_text("SchoolWise Result Will Be available on 6:00 PM")
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+
+@app.on_callback_query(filters.regex("^schoolwise$"))
+async def school_wise_handler(client, message):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("Rajasthan Board", callback_data="rj_schoolwise")
+        ]
+    ])
+
+    text = (
+        "Welcome to Result Bot!\n\n"
+        "Check your Board Result for 10th & 12th in one click.\n\n"
+        "Steps:\n"
+        "1. Tap the button below\n"
+        "2. Enter your School's First Student Roll Number and Last Student Roll Number\n"
+        "3. Get your Full School Table!\n"
+        "Use /help command to see more commands."
+    )
+
+    await message.message.edit_text(text, reply_markup=keyboard)
 
 @app.on_message(filters.command(["Server2", "server2"]) & filters.private)
 async def server2_handler(client, message):
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/Server2"))
+            InlineKeyboardButton("RBSE Board", callback_data="rj_server2")
         ],
         [
-            InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/Server2"))
+            InlineKeyboardButton("UPMSP BOARD", callback_data="up_server2")
         ],
-        [InlineKeyboardButton("8th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/8th/Server2"))]
+        [InlineKeyboardButton("BSEAP BOARD", callback_data="ap_server2")]
     ])
 
     text = (
@@ -339,19 +373,20 @@ async def server2_handler(client, message):
     )
 
     await message.reply_text(text, reply_markup=keyboard)
-@app.on_message(filters.command(["Server3", "Server3"]) & filters.private)
-async def server3_handler(client, message):
+@app.on_callback_query(filters.regex("^server2$"))
+async def server2_handler(client, message):
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("10th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/10th/Server3"))
+            InlineKeyboardButton("RBSE Board", callback_data="rj_server2")
         ],
         [
-            InlineKeyboardButton("12th Result 2025", web_app=WebAppInfo(url="https://geetasaini2042.github.io/Results/RAJ/2025/12th/Server3"))
-        ]
+            InlineKeyboardButton("UPMSP BOARD", callback_data="up_server2")
+        ],
+        [InlineKeyboardButton("BSEAP BOARD", callback_data="ap_server2")]
     ])
 
     text = (
-        "Welcome to **SingodiyaTech Result Bot!**\n\n **Server 3 \n\n**"
+        "Welcome to **SingodiyaTech Result Bot!**\n\n **Server 2 \n\n**"
         "Check your Rajasthan Board Result for 10th & 12th in one click.\n\n"
         "Steps:\n"
         "1. Tap the button below\n"
@@ -360,7 +395,118 @@ async def server3_handler(client, message):
         "Use /help command to get help."
     )
 
+    await message.message.edit_text(text, reply_markup=keyboard)
+@app.on_message(filters.command(["Server3", "Server3"]) & filters.private)
+async def server3_handler(client, message):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("Rajasthan Board", callback_data="rj_server3")
+        ]
+    ])
+
+    text = (
+        "Welcome to **SingodiyaTech Result Bot!**\n\n **Server 3 \n\n**"
+        "Check your Board Results for 10th & 12th in one click.\n\n"
+        "Steps:\n"
+        "1. Select the Board and class below\n"
+        "2. Enter your roll number\n"
+        "3. Get your marks instantly as PDF or online view.\n"
+        "Use /help command to get help."
+    )
+
     await message.reply_text(text, reply_markup=keyboard)
+@app.on_callback_query(filters.regex("^server3$"))
+async def server3_handler(client, message):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("Rajasthan Board", callback_data="rj_server3")
+        ]
+    ])
+
+    text = (
+        "Welcome to **SingodiyaTech Result Bot!**\n\n **Server 3 \n\n**"
+        "Check your Board Results for 10th & 12th in one click.\n\n"
+        "Steps:\n"
+        "1. Select the Board and class below\n"
+        "2. Enter your roll number\n"
+        "3. Get your marks instantly as PDF or online view.\n"
+        "Use /help command to get help."
+    )
+
+    await message.message.edit_text(text, reply_markup=keyboard)
+@app.on_message(filters.command(["commands", "available_commands"]) & filters.private)
+async def server3_handler(client, message):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("Next ⏭️", callback_data="rj_commands")
+        ]
+    ])
+
+    text = """
+📋 **Available Bot Commands**
+
+🔰 **Main Commands**
+• /start - Start the bot and see main options
+• /help - Rajasthan Board Help & Usage Guide
+• /available_commands - Show all available commands (this list)
+
+🏫 **School/Board Results**
+• /board_exams or /school_boards - View state board results (Raj/UP/AP)
+• /competition_exams - View Other Exam Results (NEET/JEE/NDA/UPSC..)
+• /university_results - View University Results
+• /board_help - Help for school board results
+• /result2025 - Latest 2025 Board Results
+• /OldResult - Previous year results
+• /OldResultNamewise - Name-wise old results
+
+🔍 **Result Search Options**
+• /NameWise - Search result by student name
+• /SchoolWise - Get all results for a school
+• /Server2, /Server3 - Alternate result servers
+
+📩 **Feedback & Support**
+• /Feedback - Send your feedback or suggestion
+• /ContactAdmin - Get contact details of support admin
+"""
+
+    await message.reply_text(text, reply_markup=keyboard)
+
+@app.on_callback_query(filters.regex("^commands$"))
+async def server2_handler(client, message):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("Next ⏭️", callback_data="rj_commands")
+        ]
+    ])
+
+    text = """
+📋 **Available Bot Commands**
+
+🔰 **Main Commands**
+• /start - Start the bot and see main options
+• /help - Rajasthan Board Help & Usage Guide
+• /available_commands - Show all available commands (this list)
+
+🏫 **School/Board Results**
+• /board_exams or /school_boards - View state board results (Raj/UP/AP)
+• /competition_exams - View Other Exam Results (NEET/JEE/NDA/UPSC..)
+• /university_results - View University Results
+• /board_help - Help for school board results
+• /result2025 - Latest 2025 Board Results
+• /OldResult - Previous year results
+• /OldResultNamewise - Name-wise old results
+
+🔍 **Result Search Options**
+• /NameWise - Search result by student name
+• /SchoolWise - Get all results for a school
+• /Server2, /Server3 - Alternate result servers
+
+📩 **Feedback & Support**
+• /Feedback - Send your feedback or suggestion
+• /ContactAdmin - Get contact details of support admin
+"""
+
+    await message.message.edit_text(text, reply_markup=keyboard)
 
 if __name__ == "__main__":
     flask_thread = threading.Thread(target=run_flask)
